@@ -11,10 +11,10 @@ RESOLUTION = (MAX_WIDTH, MAX_HEIGHT)
 
 def main():
     x = 50
-    y = 50
+    y = 500
     width = 40
     height = 60
-    speed = 5
+    speed = 0.25
     is_jumping = False
     jump_count = 10
 
@@ -24,9 +24,11 @@ def main():
     screen = pygame.display.set_mode(RESOLUTION, FULLSCREEN, bestdepth)
     pygame.display.set_caption('Pygame')
 
+    clock = pygame.time.Clock()
+
     running = True
     while running:
-        pygame.time.delay(30)
+        dt = clock.tick(30)
 
         for event in pygame.event.get():
             press_close_window = event.type == pygame.QUIT
@@ -36,15 +38,15 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and x > 0:
-            x -= speed
+            x -= speed * dt
         if keys[pygame.K_RIGHT] and (x + width) < MAX_WIDTH:
-            x += speed
+            x += speed * dt
 
         if not is_jumping:
             if keys[pygame.K_UP] and y > 0:
-                y -= speed
+                y -= speed * dt
             if keys[pygame.K_DOWN] and (y + height) < MAX_HEIGHT:
-                y += speed
+                y += speed * dt
             if keys[pygame.K_SPACE]:
                 is_jumping = True
         else:
