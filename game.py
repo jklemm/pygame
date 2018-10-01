@@ -2,15 +2,17 @@ import pygame
 from pygame.locals import *
 
 FULLSCREEN = 0
-
-x = 50
-y = 50
-width = 40
-height = 60
-vel = 5
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 
 def main():
+    x = 50
+    y = 50
+    width = 40
+    height = 60
+    vel = 5
+
     pygame.init()
 
     bestdepth = pygame.display.mode_ok((800, 600), FULLSCREEN, 32)
@@ -27,7 +29,18 @@ def main():
             if press_close_window or press_esc_button:
                 running = False
 
-        pygame.draw.rect(screen, (255, 0, 0), (x, y, width, height))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            x -= vel
+        if keys[pygame.K_RIGHT]:
+            x += vel
+        if keys[pygame.K_UP]:
+            y -= vel
+        if keys[pygame.K_DOWN]:
+            y += vel
+
+        screen.fill(BLACK)
+        pygame.draw.rect(screen, RED, (x, y, width, height))
         pygame.display.update()
 
     pygame.quit()
