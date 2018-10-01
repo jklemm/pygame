@@ -9,6 +9,12 @@ MAX_HEIGHT = 600
 RESOLUTION = (MAX_WIDTH, MAX_HEIGHT)
 
 
+def redraw_screen(screen, width, height, x, y):
+    screen.fill(BLACK)
+    pygame.draw.rect(screen, RED, (x, y, width, height))
+    pygame.display.update()
+
+
 def main():
     x = 50
     y = 500
@@ -60,9 +66,7 @@ def main():
                 is_jumping = False
                 jump_count = 10
 
-        screen.fill(BLACK)
-        pygame.draw.rect(screen, RED, (x, y, width, height))
-        pygame.display.update()
+        redraw_screen(screen, width, height, x, y)
 
     pygame.quit()
 
